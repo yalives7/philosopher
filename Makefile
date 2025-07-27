@@ -2,7 +2,7 @@
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude
+CFLAGS = -Wall -Wextra -Werror -Iinclude -pthread
 RM = rm -f
 
 SRCS = \

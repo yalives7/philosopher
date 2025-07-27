@@ -64,16 +64,3 @@ void	print_philo_action(t_philo *philo, const char *status)
 	}
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
-
-// Gelişmiş dead loop kontrolü - referans projeden esinlenildi
-int	dead_loop_check(t_data *data)
-{
-	pthread_mutex_lock(&data->death_mutex);
-	if (data->dead_flag == 1 || data->simulation_end == 1)
-	{
-		pthread_mutex_unlock(&data->death_mutex);
-		return (1); // Simülasyon bitti
-	}
-	pthread_mutex_unlock(&data->death_mutex);
-	return (0); // Devam et
-}

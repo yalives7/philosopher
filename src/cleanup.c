@@ -22,13 +22,14 @@ static void	destroy_mutexes(t_data *data)
 
 void	clean_up(t_data *data)
 {
-	if (data->philos)
-	{
-		free(data->philos);
-	}
 	if (data->forks)
 	{
 		destroy_forks(data);
+	}
+	if (data->philos)
+	{
+		free(data->philos);
+		data->philos = NULL;
 	}
 	destroy_mutexes(data);
 }

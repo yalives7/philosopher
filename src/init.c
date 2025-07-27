@@ -8,12 +8,22 @@ static int	init_mutexes(t_data *data)
 	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
 		return (1);
 	if (pthread_mutex_init(&data->death_mutex, NULL) != 0)
+	{
+		pthread_mutex_destroy(&data->print_mutex);
 		return (1);
+	}
 	i = 0;
 	while (i < data->num_philos)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+		{
+			// Önceki mutex'leri temizle
+			while (--i >= 0)
+				pthread_mutex_destroy(&data->forks[i]);
+			pthread_mutex_destroy(&data->death_mutex);
+			pthread_mutex_destroy(&data->print_mutex);
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -42,6 +52,7 @@ static int	init_philos(t_data *data)
 		data->philos[i].id = i + 1;
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].is_eating = 0; // Başlangıçta yemek yemiyor
+		data->philos[i].forks_taken = 0;
 		data->philos[i].full_reported = 0;
 		data->philos[i].last_meal = data->start_time;
 		data->philos[i].data = data;
@@ -60,10 +71,17 @@ int	init_all(t_data *data)
 	if (!data->forks)
 	{
 		free(data->philos);
+		data->philos = NULL;
 		return (1);
 	}
 	if (init_mutexes(data))
+	{
+		free(data->philos);
+		free(data->forks);
+		data->philos = NULL;
+		data->forks = NULL;
 		return (1);
+	}
 	data->start_time = get_timestamp_ms();
 	data->simulation_end = 0;
 	data->dead_flag = 0; // Kimse ölmedi başlangıçta
