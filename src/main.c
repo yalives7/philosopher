@@ -6,7 +6,7 @@
 /*   By: sungor <sungor@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 23:40:56 by sungor            #+#    #+#             */
-/*   Updated: 2025/07/29 00:01:12 by sungor           ###   ########.fr       */
+/*   Updated: 2025/07/29 00:19:54 by sungor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void	signal_handler(int sig)
 {
 	(void)sig;
-	write(2, "Program interrupted\n", 20);
+	write(2, "Signal received, exiting...\n", 28);
+	exit(130);
 }
 
 int	parse_args(int ac, char **arg, t_data *data)
