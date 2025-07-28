@@ -83,6 +83,7 @@ static void	philosopher_cycle(t_philo *philo)
 	smart_sleep(philo->data->time_to_sleep);
 	if (has_simulation_ended(philo->data))
 		return ;
+	print_philo_action(philo, "is thinking");
 	usleep(1000);
 }
 
