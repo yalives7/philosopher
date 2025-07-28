@@ -1,4 +1,15 @@
-// init.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sungor <sungor@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 23:40:49 by sungor            #+#    #+#             */
+/*   Updated: 2025/07/28 23:40:50 by sungor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	init_mutexes(t_data *data)
@@ -17,7 +28,6 @@ static int	init_mutexes(t_data *data)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
 		{
-			// Önceki mutex'leri temizle
 			while (--i >= 0)
 				pthread_mutex_destroy(&data->forks[i]);
 			pthread_mutex_destroy(&data->death_mutex);
@@ -51,7 +61,7 @@ static int	init_philos(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].meals_eaten = 0;
-		data->philos[i].is_eating = 0; // Başlangıçta yemek yemiyor
+		data->philos[i].is_eating = 0;
 		data->philos[i].forks_taken = 0;
 		data->philos[i].full_reported = 0;
 		data->philos[i].last_meal = data->start_time;
@@ -84,7 +94,7 @@ int	init_all(t_data *data)
 	}
 	data->start_time = get_timestamp_ms();
 	data->simulation_end = 0;
-	data->dead_flag = 0; // Kimse ölmedi başlangıçta
+	data->dead_flag = 0;
 	data->full_philos = 0;
 	if (init_philos(data))
 		return (1);

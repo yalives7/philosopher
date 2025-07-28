@@ -1,4 +1,15 @@
-// start.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sungor <sungor@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 23:41:31 by sungor            #+#    #+#             */
+/*   Updated: 2025/07/28 23:41:32 by sungor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	create_threads(t_data *data)
@@ -43,5 +54,5 @@ void	start_simulation(t_data *data)
 	if (create_threads(data) != 0)
 		return ;
 	join_threads(data);
-	pthread_join(monitor, NULL); // <-- EKLENDİ
+	pthread_join(monitor, NULL);
 }

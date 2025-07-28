@@ -11,6 +11,8 @@ SRCS = \
 	src/start.c \
 	src/philo.c \
 	src/routine.c \
+	src/routine2.c \
+	src/validation.c \
 	src/utils.c \
 	src/cleanup.c\
 	src/monitor.c

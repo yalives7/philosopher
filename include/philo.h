@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sungor <sungor@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 23:41:56 by sungor            #+#    #+#             */
+/*   Updated: 2025/07/28 23:53:58 by sungor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
 # include <pthread.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-# include <signal.h>
 
-struct s_data;
+struct	s_data;
 
 typedef struct s_philo
 {
@@ -42,6 +54,9 @@ typedef struct s_data
 }					t_data;
 
 int					parse_args(int ac, char **av, t_data *data);
+int					validate_arguments(char **arg);
+int					validate_basic_args(char **arg);
+int					validate_timing_args(char **arg);
 int					init_all(t_data *data);
 void				start_simulation(t_data *data);
 void				clean_up(t_data *data);
@@ -59,5 +74,7 @@ void				smart_sleep(int duration_ms, t_data *data);
 int					has_simulation_ended(t_data *data);
 void				print_philo_action(t_philo *philo, const char *status);
 void				*monitor_routine(void *arg);
+int					grab_forks(t_philo *philo);
+void				release_forks(t_philo *philo);
 
 #endif

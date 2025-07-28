@@ -1,4 +1,15 @@
-// Argument içeriğinin sadece sayı olup olmadığını kontrol eder
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sungor <sungor@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 23:40:56 by sungor            #+#    #+#             */
+/*   Updated: 2025/07/28 23:54:01 by sungor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static t_data	*g_data = NULL;
@@ -12,53 +23,6 @@ static void	signal_handler(int sig)
 		g_data->simulation_end = 1;
 		pthread_mutex_unlock(&g_data->death_mutex);
 	}
-}
-
-static int	check_arg_content(char *arg)
-{
-	int	i;
-
-	if (!arg || arg[0] == '\0')
-		return (1);
-	i = 0;
-	while (arg[i] != '\0')
-	{
-		if (arg[i] < '0' || arg[i] > '9')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static int	validate_arguments(char **arg)
-{
-	if (atoi(arg[1]) <= 0 || check_arg_content(arg[1]) == 1)
-	{
-		printf("Error: Invalid number of philosophers"
-				" (must be positive number)\n");
-		return (1);
-	}
-	if (atoi(arg[2]) <= 0 || check_arg_content(arg[2]) == 1)
-	{
-		printf("Error: Invalid time to die (must be positive number)\n");
-		return (1);
-	}
-	if (atoi(arg[3]) <= 0 || check_arg_content(arg[3]) == 1)
-	{
-		printf("Error: Invalid time to eat (must be positive number)\n");
-		return (1);
-	}
-	if (atoi(arg[4]) <= 0 || check_arg_content(arg[4]) == 1)
-	{
-		printf("Error: Invalid time to sleep (must be positive number)\n");
-		return (1);
-	}
-	if (arg[5] && (atoi(arg[5]) <= 0 || check_arg_content(arg[5]) == 1))
-	{
-		printf("Error: Invalid must_eat_count (must be positive number)\n");
-		return (1);
-	}
-	return (0);
 }
 
 int	parse_args(int ac, char **arg, t_data *data)
@@ -93,12 +57,9 @@ int	main(int ac, char **arg)
 		printf("Error: Initialization failed\n");
 		return (1);
 	}
-	
-	// Global pointer set et ve signal handler kaydet
 	g_data = &data;
 	signal(SIGTERM, signal_handler);
 	signal(SIGINT, signal_handler);
-	
 	start_simulation(&data);
 	clean_up(&data);
 	return (0);

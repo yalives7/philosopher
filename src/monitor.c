@@ -1,4 +1,15 @@
-// monitor.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sungor <sungor@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/28 23:41:07 by sungor            #+#    #+#             */
+/*   Updated: 2025/07/28 23:41:08 by sungor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	is_philosopher_dead(t_philo *philo, t_data *data)
@@ -19,8 +30,8 @@ static int	is_philosopher_dead(t_philo *philo, t_data *data)
 		data->simulation_end = 1;
 		pthread_mutex_unlock(&data->death_mutex);
 		pthread_mutex_lock(&data->print_mutex);
-		printf("%lld %d %s\n", current_time - data->start_time,
-			philo->id, "died");
+		printf("%lld %d %s\n", current_time - data->start_time, philo->id,
+			"died");
 		pthread_mutex_unlock(&data->print_mutex);
 		return (1);
 	}
@@ -74,8 +85,7 @@ void	*monitor_routine(void *arg)
 			return (NULL);
 		if (has_simulation_ended(data))
 			break ;
-		usleep(500); // Daha kısa aralık
+		usleep(500);
 	}
 	return (NULL);
 }
-
