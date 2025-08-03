@@ -1,0 +1,6 @@
+git@github.com:AntonioSebastiaoPedro/philosophers_tester.git
+chmod +x tester.sh
+cd /home/mujde/Desktop/normocontrol && ./philosophers_tester/philo_tester.sh -l
+
+
+git@github.com:MichelleJiam/LazyPhilosophersTester.git

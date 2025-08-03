@@ -1,0 +1,14 @@
+# 1. Projeyi derle
+make
+
+# 2. Memory leak kontrolü
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 4 410 200 200
+
+# 3. Data race kontrolü (Helgrind)
+valgrind --tool=helgrind ./philo 4 410 200 200
+
+# 4. Data race kontrolü (DRD)
+valgrind --tool=drd ./philo 4 410 200 200
+
+# 5. Kısa süreli test için timeout kullanın
+timeout 10 valgrind --tool=helgrind ./philo 4 410 200 200
