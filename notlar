@@ -1,0 +1,9 @@
+
+// 500 den az microsniyeler için usleep kullan
+// Bende ki method 1 Ms uyutacaksan 800microsaniye usleep at 200 microsaniye içib spinlock at (while true)
+
+
+// 6 610 200 200 çalışıyor ama 5 600 200 100 çalışmıyor
+// 200 410 200 200 çalışmıyor 
+// 199 610 200 200 hiç çalışmıyor
+// thinking süresi ekle 
